@@ -232,15 +232,11 @@ const PROJECTS = [
       { file: "01-frame39.jpg", frame: "Frame 39（專案背景與目標）" },
       { file: "02-frame41.jpg", frame: "Frame 41（事前調查）" },
       { file: "03-frame42.jpg", frame: "Frame 42（功能改良選擇）" },
-      { file: "04-frame40.jpg", frame: "Frame 40（緊急求助改良）" },
+      { file: "04-frame40.jpg", frame: "Frame 40（緊急求助改良）", full: true },
       { file: "05-frame43.jpg", frame: "Frame 43（成績查詢改良）" },
       { file: "06-frame44.jpg", frame: "Frame 44（測試結果）" },
+      { file: "07-frame54.jpg", frame: "Frame 54（Thank for Watching）", full: true },
     ],
-    tail: `
-<section class="thanks" aria-label="Thank for Watching">
-  <div class="thanks-text"><span>Thank for</span><br><span>Watching！</span></div>
-  <img class="thanks-img" src="assets/pages/uiux/07-thanks.jpg" data-frame="1 4987979（Thank for Watching 手機圖）" alt="">
-</section>`,
   },
   {
     slug: "vis",

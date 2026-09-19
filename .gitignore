@@ -2,6 +2,4 @@ node_modules/
 .DS_Store
 Thumbs.db
 # raw Figma exports (kept on disk, not needed by the site)
-/VIS/
-/蛇燈/
-/所有頁面/
+/figma-exports/
