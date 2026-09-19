@@ -68,6 +68,7 @@ const shell = ({ title, body, extraHead = "" }) => `<!DOCTYPE html>
 <title>${title}</title>
 <meta name="description" content="吳品潔 LOFY 的設計作品集：產品設計、視覺傳達、品牌設計、企劃流程。">
 ${FONTS}
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 <link rel="stylesheet" href="css/style.css">
 ${extraHead}
 </head>
@@ -238,7 +239,7 @@ const PROJECTS = [
     tail: `
 <section class="thanks" aria-label="Thank for Watching">
   <div class="thanks-text"><span>Thank for</span><br><span>Watching！</span></div>
-  <img class="thanks-img" src="assets/pages/uiux/07-thanks.png" data-frame="1 4987979（Thank for Watching 手機圖）" alt="">
+  <img class="thanks-img" src="assets/pages/uiux/07-thanks.jpg" data-frame="1 4987979（Thank for Watching 手機圖）" alt="">
 </section>`,
   },
   {
