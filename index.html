@@ -3,12 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>IT's LOFY DESIGN — 吳品潔設計作品集</title>
-<meta name="description" content="吳品潔 LOFY 的設計作品集：產品設計、視覺傳達、品牌設計、企劃流程。">
+<title>IT's LOFY DESIGN — 吳品潔作品集</title>
+<meta name="description" content="吳品潔 LOFY 的作品集：資訊作品（AI 應用、網站開發）與設計作品（品牌識別、產品設計、UI/UX）。">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Anybody:wght@400;500;600&family=Inter:wght@400;500;700&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 <link rel="stylesheet" href="css/style.css">
-
 </head>
 <body>
 <div class="page">
@@ -19,13 +18,14 @@
       <span class="logo">IT<span class="tick">’</span>s LOFY DESIGN</span>
     </a>
     <nav class="site-nav" aria-label="主選單">
-      <a href="index.html#about">ABOUT ME</a>
-      <a href="index.html#portfolio">設計作品集</a>
+      <a href="index.html#about" class="is-active">ABOUT ME</a>
+      <a href="tech.html">資訊作品</a>
+      <a href="design.html">設計作品</a>
     </nav>
   </div>
 </header>
 
-<section class="banner" aria-label="主視覺">
+<section class="banner banner--home" aria-label="主視覺">
   <img src="assets/banner-home.png" alt="IT's LOFY DESIGN — 產品設計 | 視覺傳達 | 品牌設計 | 企劃流程" width="1440" height="669">
 </section>
 
@@ -56,6 +56,8 @@
 
       <div class="band-block">
         <div class="band-title"><h3>實習經歷</h3><span>Professional Experience</span></div>
+        <div class="band-row"><span class="lbl">歐萊德國際股份有限公司</span><span class="meta">品牌 AI 創新小組實習生 2026</span></div>
+        <div class="band-row"><span class="lbl">創點子媒體行銷有限公司</span><span class="meta">實習助理 2025</span></div>
         <div class="band-row"><span class="lbl">大樹國際文化企業股份有限公司</span><span class="meta">前端開發實習生 2023</span></div>
         <ul class="band-bullets">
           <li>協助一間沒有 IT 部門的連鎖教育機構進行數位轉型。</li>
@@ -81,6 +83,10 @@
             <h4>3D建模</h4>
             <ul><li>Blender</li><li>Sketchup</li><li>AutoCad(2D、3D)</li></ul>
           </div>
+          <div>
+            <h4>AI / Web</h4>
+            <ul><li>n8n / LINE Bot</li><li>HTML / CSS / JS</li><li>NotebookLM / Cursor</li></ul>
+          </div>
         </div>
       </div>
     </div>
@@ -88,46 +94,23 @@
 </section>
 
 <section class="portfolio" id="portfolio">
-  <h2 class="portfolio-title"><img src="assets/sakura.png" alt="">作品集 | PORTFOLIO</h2>
+  <h2 class="portfolio-title"><span class="spark">✦</span>作品集 | PORTFOLIO</h2>
+  <p class="portfolio-lead">作品分成兩類：以 AI 與網站開發為主的<b>資訊作品</b>，以及品牌、產品與介面的<b>設計作品</b>。</p>
   <div class="card-grid">
 
-      <a class="card" href="vis.html">
-        <div class="card-cover"><img class="bleed" src="assets/card-buffalo.png" alt="水牛安養中心 視覺規劃改造計劃"></div>
-        <h3>水牛安養中心 - 視覺規劃改造計劃</h3>
-        <p class="sub">企業品牌識別</p>
-        <div class="card-tags"><span>品牌識別</span><span>在地文化</span></div>
+      <a class="card" href="tech.html">
+        <div class="card-cover is-mosaic"><div class="mosaic"><img src="assets/pages/oright/portal-projects.jpg" alt=""><img src="assets/pages/oright/social-1.jpg" alt=""><img src="assets/pages/oright/trainer-3.jpg" alt=""><img src="assets/pages/oright/website.jpg" alt=""></div></div>
+        <h3>資訊作品 | INFORMATION</h3>
+        <p class="sub">AI 應用開發 | 網站建置 | 系統規劃</p>
+        <div class="card-tags"><span>AI Agent</span><span>LINE Bot</span><span>官網重構</span><span>資料庫</span></div>
         <div class="card-bar"></div>
       </a>
 
-      <a class="card" href="lamp.html">
-        <div class="card-cover"><img class="lamp-bg" src="assets/card-lamp.png" alt="化蛇 仿生燈具"><img class="lamp-title" src="assets/card-lamp-title.png" alt="化蛇"><span class="lamp-sub">蛇型仿生露營燈</span></div>
-        <h3>化蛇 - 仿生燈具設計</h3>
-        <p class="sub">產品設計成果報告</p>
-        <div class="card-tags"><span>產品</span><span>仿生</span><span>AI輔助設計</span><span>造型表現</span></div>
-        <div class="card-bar"></div>
-      </a>
-
-      <a class="card" href="liuchongxi.html">
-        <div class="card-cover"><img src="assets/card-liuchongxi.png" alt="六重溪部落 Tribe of Liuchong Creek"></div>
-        <h3>六重溪部落 - 文創行銷計畫</h3>
-        <p class="sub">部落視覺規劃</p>
-        <div class="card-tags"><span>品牌識別</span><span>在地文化</span></div>
-        <div class="card-bar"></div>
-      </a>
-
-      <a class="card" href="others.html">
-        <div class="card-cover"><img src="assets/card-others.png" alt="其他作品"><div class="view-more"><img src="assets/view-more.svg" alt="VIEW MORE"></div></div>
-        <h3>其他作品</h3>
-        <p class="sub">平面設計 | 3D建模作品</p>
-        <div class="card-tags"><span>視覺傳達</span><span>粉專經營</span><span>工業設計</span><span>模型展示</span></div>
-        <div class="card-bar"></div>
-      </a>
-
-      <a class="card" href="uiux.html">
-        <div class="card-cover"><img class="bleed" src="assets/card-uiux.png" alt="行動雲科 UX 改良提案 Creative Interface Design"></div>
-        <h3>行動雲科 UX 改良提案</h3>
-        <p class="sub">使用者體驗與介面改良</p>
-        <div class="card-tags"><span>APP</span><span>UI/UX</span><span>服務設計</span></div>
+      <a class="card" href="design.html">
+        <div class="card-cover is-mosaic"><div class="mosaic"><img src="assets/card-buffalo.png" alt=""><img src="assets/card-lamp.png" alt=""><img src="assets/card-liuchongxi.png" alt=""><img src="assets/card-uiux.png" alt=""></div></div>
+        <h3>設計作品 | DESIGN</h3>
+        <p class="sub">品牌識別 | 產品設計 | UI/UX | 視覺傳達</p>
+        <div class="card-tags"><span>品牌識別</span><span>產品設計</span><span>UI/UX</span><span>視覺傳達</span></div>
         <div class="card-bar"></div>
       </a>
   </div>
@@ -137,15 +120,19 @@
   <div class="container">
     <div class="footer-logo">IT<span class="tick">’</span>s LOFY DESIGN</div>
     <ul class="footer-col footer-contact">
-      <li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2Zm0 4-8 5-8-5V6l8 5 8-5v2Z" fill="#fff"/></svg><a href="mailto:wu620826@gmail.com">wu620826@gmail.com</a></li>
-      <li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8Z" fill="#fff"/></svg><a href="tel:0909463438">0909-463-438</a></li>
+      <li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2Zm0 4-8 5-8-5V6l8 5 8-5v2Z" fill="currentColor"/></svg><a href="mailto:wu620826@gmail.com">wu620826@gmail.com</a></li>
+      <li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8Z" fill="currentColor"/></svg><a href="tel:0909463438">0909-463-438</a></li>
     </ul>
     <ul class="footer-col">
-      <li><a href="liuchongxi.html">六重溪部落VIS設計</a></li>
+      <li class="footer-head"><a href="tech.html">資訊作品</a></li>
+      <li><a href="oright.html">歐萊德 AI 實習成果</a></li>
+    </ul>
+    <ul class="footer-col">
+      <li class="footer-head"><a href="design.html">設計作品</a></li>
       <li><a href="vis.html">水牛安養中心 VIS 設計</a></li>
-    </ul>
-    <ul class="footer-col">
       <li><a href="lamp.html">仿生燈具設計</a></li>
+      <li><a href="liuchongxi.html">六重溪部落 文創行銷</a></li>
+      <li><a href="uiux.html">行動雲科 UX 改良提案</a></li>
       <li><a href="others.html">其他作品</a></li>
     </ul>
     <a class="footer-about" href="index.html#about"><img src="assets/icon-about.svg" alt="">ABOUT ME</a>
