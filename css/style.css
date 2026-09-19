@@ -333,11 +333,14 @@ button { font: inherit; }
 .section-missing b { color: var(--gray); }
 
 /* ---------- Desktop scale ----------
-   The Figma frames are 1440px wide and read too large at 100% on a big
-   monitor. Render the whole page at 80% on desktop viewports (same look
-   as browser zoom 80%). Adjust the value here to taste. */
+   The Figma frames are 1440px wide. On desktop viewports (>= 1200px) a small
+   script sets `zoom` on .page to viewport-width / 1440, so the design always
+   fills the window edge to edge and every element scales proportionally
+   (see the inline script at the bottom of each page). */
+.page { max-width: none; }
+.page > * { max-width: 1440px; margin-left: auto; margin-right: auto; }
 @media (min-width: 1200px) {
-  .page { zoom: 0.8; }
+  .page > * { max-width: 1440px; }
 }
 
 /* ---------- Responsive ---------- */

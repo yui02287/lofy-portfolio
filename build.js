@@ -79,6 +79,16 @@ ${body}
 ${footer}
 </div>
 <script>
+// Scale the 1440px design to the viewport width on desktop so it fills the window.
+(function () {
+  var page = document.querySelector(".page");
+  function fit() {
+    var w = document.documentElement.clientWidth;
+    page.style.zoom = w >= 1200 ? (w / 1440) : "";
+  }
+  fit();
+  var t; window.addEventListener("resize", function () { clearTimeout(t); t = setTimeout(fit, 80); });
+})();
 // Section images that have not been exported from Figma yet fall back to a labelled placeholder.
 document.querySelectorAll("img[data-frame]").forEach(function (img) {
   img.addEventListener("error", function () {
