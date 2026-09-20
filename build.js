@@ -198,8 +198,7 @@ ${skillsRow(["product", "visual", "brand", "plan"])}
     <div class="about-text">
       <div class="about-name">
         <span class="big">LOFY</span>
-        <span class="sep">|</span>
-        <span class="zh">吳品潔<span class="en">PIN-CHIEH</span></span>
+        <span class="zh"><b>吳品潔</b><i>PIN-CHIEH</i></span>
       </div>
       <div class="about-desc">
         <p>嗨，我是來自雲科大的雙主修學生，主修資訊管理，副修創意設計。</p>
@@ -212,41 +211,45 @@ ${skillsRow(["product", "visual", "brand", "plan"])}
   <div class="about-band">
     <div class="band-col">
       <div class="band-title"><h3>學歷</h3><span>Education</span></div>
-      <div class="band-row edu"><span class="lbl">國立雲林科技大學 資訊管理系</span><span class="meta">2021/9 -</span></div>
-      <div class="band-row edu"><span class="lbl">國立雲林科技大學 創意設計系(雙主修)</span><span class="meta">2022/9 -</span></div>
+      <div class="band-row edu"><span class="lbl">國立雲林科技大學 資訊管理系</span><span class="meta">2021/9 - 2027/1</span></div>
+      <div class="band-row edu"><span class="lbl">創意設計系（輔系）</span><span class="meta">GPA 3.76｜系排 7 / 72</span></div>
 
       <div class="band-block">
         <div class="band-title"><h3>實習經歷</h3><span>Professional Experience</span></div>
-        <div class="band-row"><span class="lbl">歐萊德國際股份有限公司</span><span class="meta">品牌 AI 創新小組實習生 2026</span></div>
-        <div class="band-row"><span class="lbl">創點子媒體行銷有限公司</span><span class="meta">實習助理 2025</span></div>
-        <div class="band-row"><span class="lbl">大樹國際文化企業股份有限公司</span><span class="meta">前端開發實習生 2023</span></div>
-        <ul class="band-bullets">
-          <li>協助一間沒有 IT 部門的連鎖教育機構進行數位轉型。</li>
-          <li>專注於前端介面開發，負責頁面設計、互動流程優化與資料呈現。</li>
-          <li>協助團隊打造客製化的內部管理系統。</li>
-        </ul>
+        <div class="band-job">
+          <div class="band-row"><span class="lbl">歐萊德國際股份有限公司</span><span class="meta">品牌 AI 創新小組實習生 2026</span></div>
+          <p>擔任 AI 小組組長，統籌官網重構並完成十項 AI 應用實作。</p>
+        </div>
+        <div class="band-job">
+          <div class="band-row"><span class="lbl">創點子媒體行銷有限公司</span><span class="meta">社群經營及視覺設計實習助理 2025</span></div>
+          <p>負責社群內容與視覺設計，兩個月內 IG 瀏覽數提升 328%。</p>
+        </div>
+        <div class="band-job">
+          <div class="band-row"><span class="lbl">大樹國際文化企業股份有限公司</span><span class="meta">前端開發實習生 2023</span></div>
+          <p>協助無 IT 部門的教育機構數位轉型，系統響應時間由 300ms 降至 100ms。</p>
+        </div>
       </div>
     </div>
 
     <div class="band-col">
       <div class="band-title"><h3>語言能力</h3><span>Languages</span></div>
-      <div class="band-row"><span class="lbl">英文</span><span class="meta">TOEIC 720</span></div>
-      <div class="band-row"><span class="lbl">日文</span><span class="meta">基礎會話</span></div>
+      <div class="band-row"><span class="lbl">中文</span><span class="meta">聽 / 說 / 讀 / 寫 精通</span></div>
+      <div class="band-row"><span class="lbl">英文</span><span class="meta">TOEIC 720｜可閱讀專業文件與商務往來</span></div>
 
       <div class="band-block">
         <div class="band-title"><h3>關鍵技能</h3><span>Key Skills</span></div>
         <div class="skill-lists">
           <div>
-            <h4>常用軟體</h4>
-            <ul><li>Figma</li><li>illustrator</li><li>photoshop</li></ul>
+            <h4>設計軟體</h4>
+            <ul><li>Figma、Canva</li><li>Illustrator、Photoshop</li><li>InDesign、Premiere</li></ul>
           </div>
           <div>
             <h4>3D建模</h4>
-            <ul><li>Blender</li><li>Sketchup</li><li>AutoCad(2D、3D)</li></ul>
+            <ul><li>Blender</li><li>SketchUp</li><li>AutoCad(2D、3D)</li></ul>
           </div>
           <div>
-            <h4>AI / Web</h4>
-            <ul><li>n8n / LINE Bot</li><li>HTML / CSS / JS</li><li>NotebookLM / Cursor</li></ul>
+            <h4>AI / 前端</h4>
+            <ul><li>RAG、AI Agent</li><li>NotebookLM、Cursor</li><li>HTML、CSS、Vue.js</li></ul>
           </div>
         </div>
       </div>

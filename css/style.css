@@ -175,8 +175,8 @@ button { font: inherit; }
 .about-text { flex: 1 1 auto; min-width: 0; }
 .about-name {
   display: flex;
-  align-items: baseline;
-  gap: 12px;
+  align-items: center;
+  gap: 22px;
   color: var(--brown);
   margin-top: 8px;
 }
@@ -187,9 +187,26 @@ button { font: inherit; }
   line-height: 1;
   font-variation-settings: "wdth" 100;
 }
-.about-name .sep { font-size: 36px; line-height: 1; color: var(--tan); }
-.about-name .zh { font-weight: 500; font-size: 24px; line-height: 1.1; }
-.about-name .en { display: block; font-weight: 500; font-size: 20px; margin-top: 4px; color: var(--clay); }
+/* 中／英兩行靠同一條左邊線；直線分隔改由 border 畫，不受字體側邊空白影響 */
+.about-name .zh {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  padding-left: 22px;
+  border-left: 1px solid var(--tan);
+  align-self: stretch;
+  justify-content: center;
+}
+.about-name .zh b { font-weight: 500; font-size: 24px; line-height: 1; }
+.about-name .zh i {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 1;
+  letter-spacing: 0.04em;
+  color: var(--clay);
+}
 .about-desc { margin-top: 22px; line-height: 30px; max-width: 903px; }
 
 .about-band {
@@ -218,7 +235,9 @@ button { font: inherit; }
 .band-row.edu { gap: 0; }
 .band-row.edu .lbl { width: 366px; }
 .band-block { margin-top: 60px; }
-.band-bullets { margin-top: 18px; font-size: 16px; line-height: 25px; padding-left: 24px; list-style: disc; max-width: 574px; color: var(--gray-2); }
+.band-job { margin-bottom: 12px; }
+.band-job .band-row { margin-bottom: 2px; }
+.band-job p { font-size: 16px; line-height: 22px; color: var(--gray-2); max-width: 600px; }
 .skill-lists { display: flex; gap: 60px; margin-top: 14px; }
 .skill-lists h4 { margin: 0 0 10px; font-weight: 400; font-size: 20px; }
 .skill-lists li { line-height: 24px; }
