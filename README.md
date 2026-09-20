@@ -11,7 +11,7 @@
 | 檔案 | 說明 |
 |---|---|
 | `index.html` | 首頁（Banner、專長、About me、兩個作品分類入口） |
-| `tech.html` | 資訊作品總頁（專案卡片＋歐萊德十項實作的快速入口） |
+| `tech.html` | 資訊作品總頁（歐萊德實習十項 AI 實作的卡片，點進去跳到 `oright.html` 對應段落） |
 | `design.html` | 設計作品總頁（Behance 嵌入＋五個設計專案卡片） |
 | `oright.html` | 資訊作品：歐萊德 AI 實習成果（由實習成果簡報改排成網頁，圖在 `assets/pages/oright/`） |
 | `uiux.html` | 行動雲科 UX 改良提案 |

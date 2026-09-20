@@ -340,34 +340,15 @@ const techBody = `
 ${indexHero({
   eyebrow: "INFORMATION WORKS",
   title: "資訊作品",
-  lead: "以 AI 應用開發、網站建置與系統規劃為主。重點不只是做得出來，而是做出能被長期使用與維護的工具。",
+  lead: "以 AI 應用開發、網站建置與系統規劃為主。重點不只是做得出來，而是做出能被長期使用與維護的工具。以下為在歐萊德實習期間完成的十項實作，完整成果與心得見 <a class=\"text-link\" href=\"oright.html\">歐萊德 AI 實習成果 →</a>",
 })}
 
 <section class="portfolio" id="portfolio">
-  <h2 class="portfolio-title"><span class="spark">✦</span>專案 | PROJECTS</h2>
-  <div class="card-grid">
-${card({
-  href: "oright.html",
-  title: "歐萊德 AI 實習成果",
-  sub: "品牌溝通中心 品牌 AI 創新小組 | 2026",
-  tags: ["AI Agent", "LINE OA", "RAG", "官網重構", "GEO"],
-  coverClass: "is-mosaic",
-  cover: mosaic([
-    "assets/pages/oright/portal-weekly.jpg",
-    "assets/pages/oright/social-4.jpg",
-    "assets/pages/oright/trainer-1.jpg",
-    "assets/pages/oright/dpp-3.jpg",
-  ]),
-})}
-  </div>
-
-  <h3 class="mini-title">歐萊德實習 — 十項 AI 應用實作</h3>
   <div class="mini-grid">
 ${ORIGHT_WORKS.map(
   (w) => `    <a class="mini-card" href="oright.html#${w.id}">
       <img src="assets/pages/oright/${w.img}.jpg" alt="" loading="lazy">
       <div class="mini-body">
-        <span class="mini-n">${w.n}</span>
         <h4>${w.title}</h4>
         <p>${w.blurb}</p>
       </div>
@@ -380,7 +361,23 @@ ${ORIGHT_WORKS.map(
 /* 資訊作品：歐萊德 AI 實習成果（內容來自實習成果簡報）              */
 /* ------------------------------------------------------------------ */
 
-const shot = (name, cls = "") => `<img class="${cls}" src="assets/pages/oright/${name}.jpg" alt="" loading="lazy">`;
+const SHOT_TYPE = {
+  "line-1": "square", "line-2": "wide", "line-3": "square", "line-4": "square", "line-5": "phone", "line-6": "square",
+  "social-1": "square", "social-2": "square", "social-3": "phone", "social-4": "phone",
+  "trainer-1": "square", "trainer-2": "square", "trainer-3": "square",
+  "intel-1": "wide", "intel-2": "wide",
+  "watermark-1": "wide", "watermark-2": "phone",
+  "proof-1": "wide", "oldsite-1": "wide", "dm-1": "wide",
+  "video-1": "phone", "video-2": "phone",
+  "dpp-1": "wide", "dpp-2": "square", "dpp-3": "square",
+  "portal-projects": "square", "portal-weekly": "square", "award-envelope": "phone", "award-notice": "phone",
+  "website": "wide", "talk": "wide",
+};
+// tile = fixed-size frame (cream background, image fitted inside) so every row lines up
+const shot = (name, cls = "") =>
+  cls
+    ? `<img class="${cls}" src="assets/pages/oright/${name}.jpg" alt="" loading="lazy">`
+    : `<figure class="tile tile--${SHOT_TYPE[name] || "square"}"><img src="assets/pages/oright/${name}.jpg" alt="" loading="lazy"></figure>`;
 const check = (items) => `<ul class="check">${items.map((i) => `<li>${i}</li>`).join("")}</ul>`;
 const secHead = (title, en) => `<div class="sec-head"><h2>${title}</h2>${en ? `<span>${en}</span>` : ""}<i></i></div>`;
 
@@ -400,20 +397,13 @@ const orightBody = `
     <p class="eyebrow">O’RIGHT × AI INNOVATION TEAM</p>
     <h1>歐萊德 AI 實習成果</h1>
     <p class="pbanner-sub">品牌溝通中心 品牌 AI 創新小組 ｜ 實習生 ｜ 2026/01 –</p>
-    <div class="card-tags"><span>AI Agent</span><span>LINE OA</span><span>RAG</span><span>官網重構</span><span>GEO 優化</span></div>
+    <div class="card-tags"><span>LINE 客服機器人</span><span>社群小編 AI Agent</span><span>教育訓練機器人</span><span>官網重構</span><span>文宣編輯器</span></div>
   </div>
   <div class="pbanner-art">
     ${shot("social-4", "art-1")}
     ${shot("portal-projects", "art-2")}
     ${shot("trainer-3", "art-3")}
   </div>
-</section>
-
-<section class="stats" aria-label="重點數字">
-  <div><b>10</b><span>項 AI 應用實作</span></div>
-  <div><b>特別獎</b><span>AI 應用實踐發表會 + 個人嘉獎</span></div>
-  <div><b>近百位</b><span>同仁參與 AI 分享會</span></div>
-  <div><b>−70%</b><span>校稿平台減少的來回溝通</span></div>
 </section>
 
 <main class="project-body">
