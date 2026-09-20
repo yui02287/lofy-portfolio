@@ -420,10 +420,10 @@ button { font: inherit; }
 .site-footer .container {
   min-height: 193px;
   display: grid;
-  grid-template-columns: 376px 268px 230px 262px 1fr;
+  grid-template-columns: 300px 250px 250px 215px 1fr;
+  column-gap: 30px;
   align-items: start;
   padding: 50px 73px 44px;
-  gap: 0;
 }
 .footer-logo {
   font-family: var(--font-display);
@@ -434,7 +434,8 @@ button { font: inherit; }
   margin-top: 6px;
 }
 .footer-logo .tick { color: var(--tan); }
-.footer-col { display: flex; flex-direction: column; gap: 14px; font-size: 18px; }
+.footer-col { display: flex; flex-direction: column; gap: 12px; font-size: 17px; }
+.footer-col li { white-space: nowrap; }
 .footer-col a { font-weight: 400; }
 .footer-col a:hover { text-decoration: underline; }
 .footer-head { font-size: 14px; letter-spacing: 0.18em; color: var(--tan); margin-bottom: 2px; }
@@ -509,22 +510,23 @@ button { font: inherit; }
 .pbanner-art .art-2 { left: 200px; top: 110px; width: 200px; height: 320px; transform: rotate(3deg); z-index: 2; }
 .pbanner-art .art-3 { left: 330px; top: 70px; width: 300px; height: 260px; transform: rotate(8deg); }
 
-/* fixed-size image tiles so screenshots of different shapes line up */
-.tile {
-  margin: 0;
-  height: 380px;
-  border-radius: 14px;
-  background: var(--cream);
-  border: 1px solid var(--line);
-  overflow: hidden;
-  flex: 0 0 auto;
-  display: flex; align-items: center; justify-content: center;
+/* Justified image rows: build.js writes each row's column ratios into --cols
+   from the real image dimensions, so every image in a row is the same height,
+   nothing is cropped, and the row fills the content width. */
+.gallery { display: flex; flex-direction: column; gap: 16px; }
+.gal-row {
+  display: grid;
+  grid-template-columns: var(--cols);
+  gap: 16px;
+  max-width: var(--rw, none);
 }
-.tile img { width: 100%; height: 100%; object-fit: contain; }
-.tile--phone { width: 214px; }
-.tile--square { width: 380px; }
-.tile--wide { width: 592px; } /* two wide tiles + gap = 1200px content width */
-.tile--wide img { object-fit: cover; object-position: top; }
+.gal-row img {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  background: var(--cream);
+}
 
 .project-body { padding: 40px 120px 20px; }
 .sec-head {
@@ -538,24 +540,13 @@ button { font: inherit; }
 .sec-head i { flex: 1 1 auto; height: 1px; background: var(--line); }
 .project-body > .sec-head:first-child { margin-top: 20px; }
 
-.info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; }
-.info-list { margin: 0; }
+.info-list { margin: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 0 60px; }
 .info-list div { display: flex; gap: 24px; padding: 14px 0; border-bottom: 1px solid var(--line); }
 .info-list dt { width: 110px; flex: 0 0 auto; color: var(--clay); }
 .info-list dd { margin: 0; }
-.timeline h4 { margin: 0 0 14px; font-size: 16px; letter-spacing: 0.14em; color: var(--clay); }
-.timeline ul { margin-bottom: 28px; border-left: 2px solid var(--sand); padding-left: 22px; }
-.timeline li { position: relative; padding-bottom: 18px; }
-.timeline li::before { content: ""; position: absolute; left: -29px; top: 8px; width: 12px; height: 12px; border-radius: 50%; background: var(--tan); }
-.timeline li b { display: block; font-weight: 500; }
-.timeline li span { display: block; font-size: 16px; color: var(--gray-2); margin-top: 4px; }
 
 .result-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px 60px; }
-.result-imgs { display: flex; gap: 14px; margin-bottom: 22px; }
-.result-imgs .tile { height: 320px; }
-.result-imgs .tile--phone { width: 180px; }
-.result-imgs .tile--square { width: 260px; }
-.result-imgs .tile--wide { width: 100%; max-width: 560px; }
+.result-imgs { margin-bottom: 22px; }
 .result h3 { margin: 0 0 12px; font-size: 24px; font-weight: 500; color: var(--brown); }
 .result p { line-height: 1.7; color: var(--gray-2); font-size: 18px; }
 
@@ -580,15 +571,6 @@ button { font: inherit; }
 .reflect p + p { margin-top: 14px; }
 
 .photos-lead { color: var(--gray-2); margin: -16px 0 28px; line-height: 1.7; }
-.photos {
-  display: grid;
-  grid-template-columns: 2fr 1fr 1fr;
-  grid-template-rows: 260px 260px;
-  gap: 16px;
-}
-.photos img { width: 100%; height: 100%; object-fit: cover; border-radius: 14px; }
-.photos .p-group { grid-row: 1 / 3; }
-.photos .p-talk { grid-column: 2 / 4; }
 
 /* ---------- Responsive ---------- */
 @media (max-width: 1440px) {
@@ -617,8 +599,8 @@ button { font: inherit; }
   .pbanner-art { left: auto; right: 10px; width: 420px; transform: scale(0.7); transform-origin: right center; }
   .pbanner h1 { font-size: 48px; }
   .project-body { padding: 24px 40px; }
-  .tile--wide { width: 100%; }
-  .info-grid, .result-grid, .reflect { grid-template-columns: 1fr; }
+  .result-grid, .reflect { grid-template-columns: 1fr; }
+  .info-list { grid-template-columns: 1fr; gap: 0; }
   .back-nav { padding: 20px 40px 0; }
 }
 @media (max-width: 768px) {
@@ -683,17 +665,9 @@ button { font: inherit; }
   .project-body { padding: 16px; }
   .sec-head { margin: 56px 0 28px; }
   .sec-head h2 { font-size: 22px; }
-  .result-imgs { flex-wrap: wrap; }
-  .result-imgs .tile { height: 240px; }
-  .tile { height: 260px; }
-  .tile--phone { width: 146px; }
-  .tile--square { width: calc(50% - 8px); }
-  .tile--wide { width: 100%; }
+  .gal-row { grid-template-columns: 1fr; max-width: none; }
+  .gallery { gap: 12px; }
   .work h3 { font-size: 22px; }
   .work-text p { font-size: 16px; }
   .reflect article { padding: 24px 20px; }
-  .photos { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
-  .photos img { height: 180px; }
-  .photos .p-group { grid-column: 1 / 3; grid-row: auto; height: 220px; }
-  .photos .p-talk { grid-column: 1 / 3; }
 }

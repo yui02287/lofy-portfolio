@@ -48,7 +48,11 @@ const footer = `
     </ul>
     <ul class="footer-col">
       <li class="footer-head"><a href="tech.html">資訊作品</a></li>
-      <li><a href="oright.html">歐萊德 AI 實習成果</a></li>
+      <li><a href="oright.html#w1">LINE OA 客服機器人</a></li>
+      <li><a href="oright.html#w2">社群小編 AI Agent</a></li>
+      <li><a href="oright.html#w3">考核 × 教育訓練機器人</a></li>
+      <li><a href="oright.html#w4">新聞與競品快訊蒐集</a></li>
+      <li><a href="tech.html">更多作品</a></li>
     </ul>
     <ul class="footer-col">
       <li class="footer-head"><a href="design.html">設計作品</a></li>
@@ -361,25 +365,77 @@ ${ORIGHT_WORKS.map(
 /* 資訊作品：歐萊德 AI 實習成果（內容來自實習成果簡報）              */
 /* ------------------------------------------------------------------ */
 
-const SHOT_TYPE = {
-  "line-1": "square", "line-2": "wide", "line-3": "square", "line-4": "square", "line-5": "phone", "line-6": "square",
-  "social-1": "square", "social-2": "square", "social-3": "phone", "social-4": "phone",
-  "trainer-1": "square", "trainer-2": "square", "trainer-3": "square",
-  "intel-1": "wide", "intel-2": "wide",
-  "watermark-1": "wide", "watermark-2": "phone",
-  "proof-1": "wide", "oldsite-1": "wide", "dm-1": "wide",
-  "video-1": "phone", "video-2": "phone",
-  "dpp-1": "wide", "dpp-2": "square", "dpp-3": "square",
-  "portal-projects": "square", "portal-weekly": "square", "award-envelope": "phone", "award-notice": "phone",
-  "website": "wide", "talk": "wide",
+const shot = (name, cls = "") => `<img class="${cls}" src="assets/pages/oright/${name}.jpg" alt="" loading="lazy">`;
+
+/* --- Justified image rows -----------------------------------------------
+   Every image keeps its own aspect ratio (never cropped), every image in a
+   row renders at the same height, and each row fills the content width
+   exactly. Widths are computed here from the real JPEG dimensions and
+   emitted as grid `fr` units, so the rows also scale down proportionally.  */
+
+const jpegSize = (file) => {
+  const b = fs.readFileSync(file);
+  let i = 2;
+  while (i < b.length) {
+    if (b[i] !== 0xff) { i++; continue; }
+    const marker = b[i + 1];
+    if (marker >= 0xc0 && marker <= 0xc3) return { h: b.readUInt16BE(i + 5), w: b.readUInt16BE(i + 7) };
+    i += 2 + b.readUInt16BE(i + 2);
+  }
+  throw new Error("no SOF marker in " + file);
 };
-// tile = fixed-size frame (cream background, image fitted inside) so every row lines up
-const shot = (name, cls = "") =>
-  cls
-    ? `<img class="${cls}" src="assets/pages/oright/${name}.jpg" alt="" loading="lazy">`
-    : `<figure class="tile tile--${SHOT_TYPE[name] || "square"}"><img src="assets/pages/oright/${name}.jpg" alt="" loading="lazy"></figure>`;
+
+const SIZE = {};
+const sizeOf = (name) => {
+  if (!SIZE[name]) SIZE[name] = jpegSize(path.join(__dirname, "assets", "pages", "oright", name + ".jpg"));
+  return SIZE[name];
+};
+const aspectOf = (name) => { const { w, h } = sizeOf(name); return w / h; };
+
+// Split into rows of nearly equal length (so no image is ever left alone in a
+// row) and deal the images so the rows end up with similar total widths —
+// wide and tall shots get mixed together instead of clumping.
+const dealRows = (names, count) => {
+  if (count < 2) return [names];
+  const base = Math.floor(names.length / count);
+  const extra = names.length % count;
+  const rows = Array.from({ length: count }, (_, r) => ({ cap: base + (r < extra ? 1 : 0), sum: 0, items: [] }));
+  for (const n of [...names].sort((a, b) => aspectOf(b) - aspectOf(a))) {
+    const row = rows.filter((r) => r.items.length < r.cap).sort((a, b) => a.sum - b.sum)[0];
+    row.items.push(n);
+    row.sum += aspectOf(n);
+  }
+  return rows.map((r) => r.items);
+};
+
+// width = usable content width, minHeight/maxHeight = how tall a row may render
+const gallery = (names, { width = 1200, minHeight = 280, maxHeight = 460, gap = 16 } = {}) => {
+  const height = (r) => (width - (r.length - 1) * gap) / r.reduce((s, n) => s + aspectOf(n), 0);
+
+  // Use as few rows as possible — ideally one — without any row getting so
+  // short that the screenshots become unreadable.
+  let rows = [names];
+  for (let count = 1; count <= names.length; count++) {
+    rows = dealRows(names, count);
+    if (rows.every((r) => height(r) >= minHeight)) break;
+  }
+
+  return `<div class="gallery">${rows
+    .map((r) => {
+      const h = height(r);
+      // a row that would be taller than maxHeight is narrowed instead of stretched
+      const cap = h > maxHeight ? ` --rw: ${Math.round(r.reduce((s, n) => s + aspectOf(n), 0) * maxHeight + (r.length - 1) * gap)}px;` : "";
+      const cols = r.map((n) => aspectOf(n).toFixed(4) + "fr").join(" ");
+      return `<div class="gal-row" style="--cols: ${cols};${cap}">${r
+        .map((n) => { const { w, h } = sizeOf(n); return `<img src="assets/pages/oright/${n}.jpg" width="${w}" height="${h}" alt="" loading="lazy">`; })
+        .join("")}</div>`;
+    })
+    .join("")}</div>`;
+};
 const check = (items) => `<ul class="check">${items.map((i) => `<li>${i}</li>`).join("")}</ul>`;
 const secHead = (title, en) => `<div class="sec-head"><h2>${title}</h2>${en ? `<span>${en}</span>` : ""}<i></i></div>`;
+
+const RES = { width: 570, minHeight: 240, maxHeight: 360 };
 
 const work = ({ id, n, title, desc, checks, shots, layout = "" }) => `
   <article class="work ${layout}" id="${id}">
@@ -409,47 +465,33 @@ const orightBody = `
 <main class="project-body">
 
   ${secHead("基本資料", "PROFILE")}
-  <div class="info-grid">
-    <dl class="info-list">
-      <div><dt>任職單位</dt><dd>品牌溝通中心 品牌 AI 創新小組</dd></div>
-      <div><dt>職稱</dt><dd>實習生</dd></div>
-      <div><dt>姓名</dt><dd>吳品潔</dd></div>
-      <div><dt>到職日期</dt><dd>2026/01/26</dd></div>
-      <div><dt>直屬主管</dt><dd>蔡怡穎 總經理</dd></div>
-    </dl>
-    <div class="timeline">
-      <h4>學歷</h4>
-      <ul>
-        <li><b>國立雲林科技大學</b><span>資訊管理系（輔：創意設計系）</span></li>
-      </ul>
-      <h4>經歷</h4>
-      <ul>
-        <li><b>夆辰有限公司</b><span>網頁設計師 ｜ 2025/08 – 2025/12</span></li>
-        <li><b>創點子媒體行銷有限公司</b><span>實習助理 ｜ 2025/06 – 2025/08</span></li>
-        <li><b>大樹國際文化企業股份有限公司</b><span>前端開發實習生 ｜ 2023/03 – 2023/12</span></li>
-      </ul>
-    </div>
-  </div>
+  <dl class="info-list">
+    <div><dt>任職單位</dt><dd>品牌溝通中心 品牌 AI 創新小組</dd></div>
+    <div><dt>職稱</dt><dd>實習生</dd></div>
+    <div><dt>姓名</dt><dd>吳品潔</dd></div>
+    <div><dt>到職日期</dt><dd>2026/01/26</dd></div>
+    <div><dt>直屬主管</dt><dd>蔡怡穎 總經理</dd></div>
+  </dl>
 
   ${secHead("工作成效", "RESULTS")}
   <div class="result-grid">
     <article class="result">
-      <div class="result-imgs">${shot("portal-projects")}${shot("portal-weekly")}</div>
+      <div class="result-imgs">${gallery(["portal-projects","portal-weekly"], RES)}</div>
       <h3>一、AI 小組組長</h3>
       <p>作為 AI 小組組長，帶領新人熟悉環境，並主動開發平台，<span class="hl">管理並監督組內專案</span>。</p>
     </article>
     <article class="result">
-      <div class="result-imgs">${shot("award-envelope")}${shot("award-notice")}</div>
+      <div class="result-imgs">${gallery(["award-envelope","award-notice"], RES)}</div>
       <h3>二、AI 競賽</h3>
       <p>小組參與 <span class="hl">AI 應用實踐發表會</span> 獲得 <span class="hl">特別獎</span>，並以個人名義再獲 <span class="hl">嘉獎</span>。</p>
     </article>
     <article class="result">
-      <div class="result-imgs">${shot("website")}</div>
+      <div class="result-imgs">${gallery(["website"], RES)}</div>
       <h3>三、官網重構統籌</h3>
       <p>作為 PM 主導官網全面重構，整合 AI 工具完成資訊架構、版面規劃、內容整理與 <span class="hl">GEO 優化</span>，將品牌綠皮書與既有官網資訊化繁為簡。透過 <span class="hl">AI 視覺化</span> 呈現網站架構，有效提升跨部門溝通與審核效率。</p>
     </article>
     <article class="result">
-      <div class="result-imgs">${shot("talk")}</div>
+      <div class="result-imgs">${gallery(["talk"], RES)}</div>
       <h3>四、AI 分享會講者</h3>
       <p>主動發起 AI 分享會，<span class="hl">分享跨部門 AI 導入實作</span>。活動吸引近百位同仁參與，董事長、總經理及多位主管皆親自出席。</p>
     </article>
@@ -460,53 +502,53 @@ ${work({
   id: "w1", n: "一", title: "LINE OA 客服機器人",
   desc: '規劃並製作 LINE AI 客服，使用 <span class="hl">RAG 檢索技術</span> 從知識庫取用資料並回覆給客戶，真人客服即使下班也能以 AI 進行回覆。',
   checks: ["圖片、語音辨識", "多語言回覆", "提問建議、回覆品質", "批量訊息接收"],
-  shots: shot("line-1") + shot("line-3") + shot("line-4") + shot("line-6") + shot("line-2") + shot("line-5"),
+  shots: gallery(["line-1","line-3","line-4","line-6","line-2","line-5"]),
 })}
 ${work({
   id: "w2", n: "二", title: "社群小編 AI Agent",
   desc: '整合 AI Agent、LINE 與 Meta System User Token，讓代理人自動讀取 <span class="hl">貼文成效</span> 與 <span class="hl">廣告花費</span>，並依據數據 <span class="hl">快速生成合適的社群內容</span>。',
   checks: ["貼文推薦", "貼文成效檢視", "廣告成效檢視"],
-  shots: shot("social-1") + shot("social-2") + shot("social-3") + shot("social-4"),
+  shots: gallery(["social-1","social-2","social-3","social-4"]),
 })}
 ${work({
   id: "w3", n: "三", title: "考核 × 教育訓練機器人",
   desc: '設計教育訓練機器人平台，具備 <span class="hl">完整的考核機制、出題系統</span> 與 <span class="hl">後台管理功能</span>。管理者可直接於後台對話窗匯入資料，由 AI 協助修訂並更新至知識庫。目前此平台亦作為 <span class="hl">業務人員指定考核平台</span>。',
-  shots: shot("trainer-1") + shot("trainer-2") + shot("trainer-3"),
+  shots: gallery(["trainer-1","trainer-2","trainer-3"]),
 })}
 ${work({
   id: "w4", n: "四", title: "新聞與競品快訊蒐集",
   desc: '建立 <span class="hl">AI 排程</span> 尋找競品快訊，並加入 <span class="hl">公司部門資料</span> 和 <span class="hl">公司的營運方向</span>，讓 AI 生成參考建議。每日只需點開網站就能一鍵複製至群組。',
-  shots: shot("intel-1") + shot("intel-2"),
+  shots: gallery(["intel-1","intel-2"]),
 })}
 ${work({
   id: "w5", n: "五", title: "圖片浮水印編輯器",
   desc: '一鍵生成具品牌浮水印的照片，<span class="hl">大幅增加製圖效率</span>。',
-  shots: shot("watermark-1") + shot("watermark-2"),
+  shots: gallery(["watermark-1","watermark-2"]),
 })}
 ${work({
   id: "w6", n: "六", title: "官網校稿平台",
   desc: '將分散於 LINE 群組的文案審核流程整合至平台，<span class="hl">審核進度透明可追蹤</span>，行動版介面友善，方便主管查看，<span class="hl">減少至少 70% 來回溝通時間</span>。',
-  shots: shot("proof-1"),
+  shots: gallery(["proof-1"]),
 })}
 ${work({
   id: "w7", n: "七", title: "舊官網頁面更新",
   desc: '運用 AI <span class="hl">複製原官網設計風格並撰寫 HTML</span>，資通部門僅需簡單語法轉換即可上架，大幅縮短更新所需時間與人力。',
-  shots: shot("oldsite-1"),
+  shots: gallery(["oldsite-1"]),
 })}
 ${work({
   id: "w8", n: "八", title: "文宣編輯器",
   desc: '運用 AI 開發文宣編輯器並部署至 GitHub，業務人員僅需幾個步驟即可 <span class="hl">自行生成客製化文宣</span>，有效降低設計門檻與製作成本。',
-  shots: shot("dm-1"),
+  shots: gallery(["dm-1"]),
 })}
 ${work({
   id: "w9", n: "九", title: "產品短片製作",
   desc: '完整執行 <span class="hl">市場分析、腳本生成、圖片生成到影片生成</span> 的全流程，運用 AI 工具產出產品社群短影片，協助品牌內容於社群平台擴散。',
-  shots: shot("video-1") + shot("video-2"),
+  shots: gallery(["video-1","video-2"]),
 })}
 ${work({
   id: "w10", n: "十", title: "DPP 產品數位護照",
   desc: '運用 AI 依照欄位需求整理各項產品資料，建立 <span class="hl">適合前端串接</span> 與 <span class="hl">資料填寫</span> 的產品資料庫。透過完整揭露產品成分、認證與相關資訊，<span class="hl">提升永續資訊透明度</span>，同時符合歐洲市場對產品資訊揭露的要求。',
-  shots: shot("dpp-1") + shot("dpp-2") + shot("dpp-3"),
+  shots: gallery(["dpp-1","dpp-2","dpp-3"]),
 })}
 
   ${secHead("實習心得", "REFLECTION")}
@@ -525,13 +567,7 @@ ${work({
 
   ${secHead("實習照片紀錄", "MOMENTS")}
   <p class="photos-lead">實習期間參與特賣會、春酒、董事長吃冰企劃等活動，也作為 AI 講師，為同事分享好用 AI 工具。</p>
-  <div class="photos">
-    ${shot("photo-group", "p-group")}
-    ${shot("photo-dog", "p-dog")}
-    ${shot("talk", "p-talk")}
-    ${shot("photo-selfie", "p-selfie")}
-    ${shot("photo-meal", "p-meal")}
-  </div>
+  ${gallery(["photo-group","photo-dog","talk","photo-selfie","photo-meal"], { minHeight: 260, maxHeight: 340 })}
 
 </main>`;
 
