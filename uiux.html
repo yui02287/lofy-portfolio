@@ -5,9 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>行動雲科 UX 改良提案 — IT's LOFY DESIGN</title>
 <meta name="description" content="吳品潔 LOFY 的作品集：資訊作品（AI 應用、網站開發）與設計作品（品牌識別、產品設計、UI/UX）。">
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Anybody:wght@400;500;600&family=Inter:wght@400;500;700&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Noto+Serif+TC:wght@400;500;600&family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet">
+<meta name="theme-color" content="#f8f7f5">
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 <link rel="stylesheet" href="css/style.css">
+<script>document.documentElement.classList.add("js");</script>
+<script src="js/site.js" defer></script>
 </head>
 <body>
 <div class="page">
@@ -76,26 +79,5 @@
   </div>
 </footer>
 </div>
-<script>
-// Scale the 1440px design to the viewport width on desktop so it fills the window.
-(function () {
-  var page = document.querySelector(".page");
-  function fit() {
-    var w = document.documentElement.clientWidth;
-    page.style.zoom = w >= 1200 ? (w / 1440) : "";
-  }
-  fit();
-  var t; window.addEventListener("resize", function () { clearTimeout(t); t = setTimeout(fit, 80); });
-})();
-// Section images that have not been exported from Figma yet fall back to a labelled placeholder.
-document.querySelectorAll("img[data-frame]").forEach(function (img) {
-  img.addEventListener("error", function () {
-    var box = document.createElement("div");
-    box.className = "section-missing";
-    box.innerHTML = "此區塊圖片尚未匯出<br>請在 Figma 匯出畫框 <b>" + img.dataset.frame + "</b>（JPG 2x），存成 <b>" + img.getAttribute("src") + "</b>";
-    img.replaceWith(box);
-  });
-});
-</script>
 </body>
 </html>

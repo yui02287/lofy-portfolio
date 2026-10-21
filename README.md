@@ -4,7 +4,7 @@
 
 頁面架構：首頁（About me）→ 資訊作品總頁 / 設計作品總頁 → 各個作品介紹。
 
-色系：大地色（白、米、卡其、咖啡），對齊 Behance PORTFOLIO 2025；色票在 `css/style.css` 最上方的 `:root`。
+視覺語彙：個人品牌識別「層 STRATA」——從地表到岩床的 10 款色調（紙白、燕麥、灰褐、胡桃，加上墨、金、銀）、Cormorant Garamond＋思源宋體／黑體，以及取自 logotype 的三種輔助圖形：糸（交叉斜線）、菱（菱形）、圓（等高線）。色票與字體都在 `css/style.css` 最上方的 `:root`。
 
 ## 檔案
 
@@ -19,7 +19,8 @@
 | `lamp.html` | 化蛇 - 仿生燈具設計 |
 | `others.html` | 其他作品 |
 | `liuchongxi.html` | 六重溪部落 - 文創行銷計畫 |
-| `css/style.css` | 全站樣式（含手機版） |
+| `css/style.css` | 全站樣式（流動式版面，斷點 1180 / 960 / 760 / 480px） |
+| `js/site.js` | 互動：導覽列捲動收合、閱讀進度金線、逐層進場動畫、回到頂端、換頁淡出（尊重「減少動態效果」設定） |
 | `build.js` | 產生全部 HTML 的腳本（`node build.js`）；header / footer、卡片文字、歐萊德頁內容都在這裡 |
 | `assets/` | 首頁素材 |
 | `assets/pages/<頁面>/` | 各作品頁的區塊圖片 |
@@ -43,7 +44,7 @@ npx --yes serve -l 5173 .
 
 ## 與 Figma 稿的差異
 
-- 桌機（視窗寬 ≥1200px）整頁會依視窗寬度自動縮放（視窗寬 ÷ 1440），讓 1440 的稿永遠左右滿版、比例不變。邏輯在各頁底部的 inline script（原始碼在 `build.js`）；不想自動縮放就把那段 script 移除。
+- 版面為流動式：內容最寬 1200px，左右留白隨視窗縮放；不再用整頁 zoom。
 
 - 首頁作品區改成「資訊作品」「設計作品」兩張入口卡；原本的五張設計專案卡片移到 `design.html`。
 - 首頁 Banner 是 Figma 匯出的平面圖，原本有粉紅／橘色色塊；目前用 CSS 混色（`.banner--home::after`，hue blend）把色塊轉成卡其色。若之後在 Figma 改好顏色重新匯出 `assets/banner-home.png`，把那段 CSS 刪掉即可。
