@@ -55,7 +55,7 @@
 
   /* Layer-by-layer reveal: siblings come in one after another. */
   var GROUPS = [
-    ".index-hero > *", ".pbanner-text > *", ".pbanner-art img",
+    ".index-hero > *",
     ".skills .skill", ".about-photo", ".about-text", ".band-col",
     ".portfolio-title", ".portfolio-lead", ".card-grid > .card",
     ".behance", ".mini-grid > .mini-card",
@@ -76,19 +76,28 @@
     });
   });
 
-  if (reduce || !("IntersectionObserver" in window)) {
-    targets.forEach(function (el) { el.classList.add("is-in"); });
-  } else {
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (e) {
-        if (e.isIntersecting) { e.target.classList.add("is-in"); io.unobserve(e.target); }
-      });
-    }, { rootMargin: "0px 0px -8% 0px", threshold: 0 });
-    targets.forEach(function (el) { io.observe(el); });
+  // Hold the reveals until the web fonts are in, so nothing animates in a fallback face.
+  function start() {
+    if (reduce || !("IntersectionObserver" in window)) {
+      targets.forEach(function (el) { el.classList.add("is-in"); });
+    } else {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) { e.target.classList.add("is-in"); io.unobserve(e.target); }
+        });
+      }, { rootMargin: "0px 0px -8% 0px", threshold: 0 });
+      targets.forEach(function (el) { io.observe(el); });
+    }
+    doc.classList.remove("fonts-wait");
+    doc.classList.add("is-ready");
   }
-  function ready() { doc.classList.add("is-ready"); }
-  requestAnimationFrame(ready);
-  setTimeout(ready, 120); // rAF is paused in background tabs
+  var started = false;
+  function go() { if (!started) { started = true; start(); } }
+  if (document.fonts && document.fonts.ready) {
+    void document.body.offsetHeight; // lay out once so the page's fonts start loading
+    document.fonts.ready.then(go);
+    setTimeout(go, 1500); // never wait longer than this on a slow connection
+  } else go();
 
   /* Soft fade between pages of this site. */
   if (!reduce) {

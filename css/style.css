@@ -111,12 +111,8 @@ button { font: inherit; }
   box-shadow: 0 -1px 0 transparent;
   pointer-events: none;
 }
-.js .banner::after,
-.js .index-hero::after,
-.js .pbanner::after { clip-path: inset(0 100% 0 0); transition: clip-path 1.6s var(--ease-in-out) .35s; }
-.js.is-ready .banner::after,
-.js.is-ready .index-hero::after,
-.js.is-ready .pbanner::after { clip-path: inset(0 0 0 0); }
+.js .index-hero::after { clip-path: inset(0 100% 0 0); transition: clip-path 1.6s var(--ease-in-out) .35s; }
+.js.is-ready .index-hero::after { clip-path: inset(0 0 0 0); }
 
 /* ---------- Header ---------- */
 .site-header {
@@ -227,10 +223,6 @@ button { font: inherit; }
   background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 600' preserveAspectRatio='none'%3E%3Cpath d='M70 0C30 120 110 215 62 330S10 500 30 600H400V0Z' fill='%23f4f0ea'/%3E%3Cpath d='M44 0C4 120 84 215 36 330S-14 500 6 600' fill='none' stroke='%23b39b61' stroke-width='1.4'/%3E%3Cpath d='M150 0C115 130 200 235 150 345S130 500 170 600H400V0Z' fill='%23c5b8ac'/%3E%3Cpath d='M240 0C210 120 280 250 232 352S222 505 255 600H400V0Z' fill='%23a29282'/%3E%3Cpath d='M320 0C305 70 342 120 320 190S336 300 312 360 328 470 316 520 334 570 328 600H400V0Z' fill='%234a3c2a'/%3E%3C/svg%3E") right center / 100% 100% no-repeat;
   pointer-events: none;
 }
-.js .banner--home::before { clip-path: inset(0 0 0 100%); transition: clip-path 1.8s var(--ease-in-out) .2s; }
-.js.is-ready .banner--home::before { clip-path: inset(0 0 0 0); }
-.js .banner img { opacity: 0; transform: scale(1.025); transition: opacity 1.2s var(--ease), transform 2.4s var(--ease); }
-.js.is-ready .banner img { opacity: 1; transform: none; }
 
 /* ---------- Skill icon row ---------- */
 /* The icons come from one 1235×266 sprite (5 × 247px); --s scales a cell. */
@@ -830,8 +822,6 @@ button { font: inherit; }
   background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 600' preserveAspectRatio='none'%3E%3Cpath d='M150 0C110 120 205 215 150 330S120 500 175 600H600V0Z' fill='%23f4f0ea'/%3E%3Cpath d='M128 0C88 120 183 215 128 330S98 500 153 600' fill='none' stroke='%23b39b61' stroke-width='1.2'/%3E%3Cpath d='M250 0C215 130 300 235 250 345S230 500 270 600H600V0Z' fill='%23c5b8ac'/%3E%3Cpath d='M360 0C330 120 400 250 352 352S342 505 375 600H600V0Z' fill='%23a29282'/%3E%3Cpath d='M470 0C455 70 492 120 470 190S486 300 462 360 478 470 466 520 484 570 478 600H600V0Z' fill='%234a3c2a'/%3E%3C/svg%3E") right center / 100% 100% no-repeat;
   pointer-events: none;
 }
-.js .pbanner::before { transform: translateX(8%); opacity: 0; transition: transform 1.6s var(--ease), opacity 1.2s ease; }
-.js.is-ready .pbanner::before { transform: none; opacity: 1; }
 .pbanner-text { position: relative; z-index: 3; max-width: 640px; }
 .pbanner h1 {
   margin: 18px 0 18px;
@@ -861,13 +851,10 @@ button { font: inherit; }
   background: #fff;
   border: 6px solid #fff;
   box-shadow: 0 24px 48px -20px rgba(44, 41, 37, .45);
-  transition: transform 1s var(--ease), opacity 1s var(--ease);
 }
 .pbanner-art .art-1 { left: 0; top: 30px; width: 190px; height: 420px; rotate: -6deg; }
 .pbanner-art .art-2 { left: 190px; top: 90px; width: 200px; height: 320px; rotate: 3deg; z-index: 2; }
 .pbanner-art .art-3 { left: 320px; top: 40px; width: 260px; height: 240px; rotate: 8deg; }
-.pbanner-art:hover .art-1 { transform: translate(-10px, -6px); }
-.pbanner-art:hover .art-3 { transform: translate(10px, -8px); }
 
 /* Justified image rows: build.js writes each row's column ratios into --cols
    from the real image dimensions, so every image in a row is the same height,
@@ -1050,14 +1037,14 @@ button { font: inherit; }
 .js .card.rv::before, .js .card.rv::after { opacity: 0; }
 .js .card.rv.is-in::after { opacity: 1; transition: opacity .6s ease calc(var(--i, 0) * 110ms + .35s), transform .9s var(--ease); }
 .js .card.rv.is-in::before { opacity: .55; transition: opacity .6s ease calc(var(--i, 0) * 110ms + .5s), transform .9s var(--ease); }
-.js .pbanner-art img.rv { transform: translateY(40px); }
-.js .pbanner-art img.rv.is-in { transform: none; }
 .js .site-header { animation: drop .9s var(--ease) both; }
 @keyframes drop { from { opacity: 0; transform: translateY(-14px); } }
 
 /* soft page-to-page fade */
-.page { transition: opacity .22s ease; }
+.page { transition: opacity .3s ease; }
+.fonts-wait .page,
 .is-leaving .page { opacity: 0; }
+.is-leaving .page { transition-duration: .22s; }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition-duration: .01ms !important; transition-delay: 0s !important; }

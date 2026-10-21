@@ -13,7 +13,7 @@ const path = require("path");
 const FONTS =
   '<link rel="preconnect" href="https://fonts.googleapis.com">' +
   '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>' +
-  '<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Noto+Serif+TC:wght@400;500;600&family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet">';
+  '<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Noto+Serif+TC:wght@400;500;600&family=Noto+Sans+TC:wght@300;400;500&display=block" rel="stylesheet">';
 
 const MAIL_SVG =
   '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2Zm0 4-8 5-8-5V6l8 5 8-5v2Z" fill="currentColor"/></svg>';
@@ -91,7 +91,7 @@ ${FONTS}
 <meta name="theme-color" content="#f8f7f5">
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 <link rel="stylesheet" href="css/style.css">
-<script>document.documentElement.classList.add("js");</script>
+<script>(function(d){d.classList.add("js","fonts-wait");setTimeout(function(){d.classList.remove("fonts-wait")},2500)})(document.documentElement);</script>
 <script src="js/site.js" defer></script>
 </head>
 <body>
