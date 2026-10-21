@@ -48,10 +48,10 @@ const footer = `
     </ul>
     <ul class="footer-col">
       <li class="footer-head"><a href="tech.html">資訊作品</a></li>
-      <li><a href="oright.html#w1">LINE OA 客服機器人</a></li>
-      <li><a href="oright.html#w2">社群小編 AI Agent</a></li>
-      <li><a href="oright.html#w3">考核 × 教育訓練機器人</a></li>
-      <li><a href="oright.html#w4">新聞與競品快訊蒐集</a></li>
+      <li><a href="ai-line-bot.html">LINE OA 客服機器人</a></li>
+      <li><a href="ai-social-agent.html">社群小編 AI Agent</a></li>
+      <li><a href="ai-trainer-bot.html">考核 × 教育訓練機器人</a></li>
+      <li><a href="ai-news-intel.html">新聞與競品快訊蒐集</a></li>
       <li><a href="tech.html">更多作品</a></li>
     </ul>
     <ul class="footer-col">
@@ -312,18 +312,50 @@ ${DESIGN_CARDS.map(card).join("\n")}
 </section>`;
 
 // 資訊作品：目前只有歐萊德實習一個專案，底下再列出十項實作供直接跳轉
+// 資訊作品：歐萊德實習期間的十項 AI 實作，每項各自一頁（ai-<slug>.html）
 const ORIGHT_WORKS = [
-  { id: "w1", n: "一", title: "LINE OA 客服機器人", img: "line-4", blurb: "RAG 檢索知識庫，下班時間也能由 AI 回覆客戶。" },
-  { id: "w2", n: "二", title: "社群小編 AI Agent", img: "social-1", blurb: "串接 LINE 與 Meta 數據，自動讀成效、生成貼文。" },
-  { id: "w3", n: "三", title: "考核 × 教育訓練機器人", img: "trainer-3", blurb: "考核機制、出題系統與後台管理一體的訓練平台。" },
-  { id: "w4", n: "四", title: "新聞與競品快訊蒐集", img: "intel-1", blurb: "AI 排程蒐集競品動態，一鍵複製至群組。" },
-  { id: "w5", n: "五", title: "圖片浮水印編輯器", img: "watermark-1", blurb: "一鍵生成品牌浮水印照片，提升製圖效率。" },
-  { id: "w6", n: "六", title: "官網校稿平台", img: "proof-1", blurb: "文案審核流程平台化，減少 70% 來回溝通。" },
-  { id: "w7", n: "七", title: "舊官網頁面更新", img: "oldsite-1", blurb: "AI 複製官網風格撰寫 HTML，縮短上架時間。" },
-  { id: "w8", n: "八", title: "文宣編輯器", img: "dm-1", blurb: "業務自行生成客製化文宣，降低設計門檻。" },
-  { id: "w9", n: "九", title: "產品短片製作", img: "video-1", blurb: "市場分析到影片生成的 AI 全流程。" },
-  { id: "w10", n: "十", title: "DPP 產品數位護照", img: "dpp-3", blurb: "建立適合前端串接的產品資料庫，揭露永續資訊。" },
+  { slug: "line-bot", n: "一", title: "LINE OA 客服機器人", img: "line-4", blurb: "RAG 檢索知識庫，下班時間也能由 AI 回覆客戶。",
+    desc: '規劃並製作 LINE AI 客服，使用 <span class="hl">RAG 檢索技術</span> 從知識庫取用資料並回覆給客戶，真人客服即使下班也能以 AI 進行回覆。',
+    checks: ["圖片、語音辨識", "多語言回覆", "提問建議、回覆品質", "批量訊息接收"],
+    shots: ["line-1", "line-3", "line-4", "line-6", "line-2", "line-5"] },
+  { slug: "social-agent", n: "二", title: "社群小編 AI Agent", img: "social-1", blurb: "串接 LINE 與 Meta 數據，自動讀成效、生成貼文。",
+    desc: '整合 AI Agent、LINE 與 Meta System User Token，讓代理人自動讀取 <span class="hl">貼文成效</span> 與 <span class="hl">廣告花費</span>，並依據數據 <span class="hl">快速生成合適的社群內容</span>。',
+    checks: ["貼文推薦", "貼文成效檢視", "廣告成效檢視"],
+    shots: ["social-1", "social-2", "social-3", "social-4"] },
+  { slug: "trainer-bot", n: "三", title: "考核 × 教育訓練機器人", img: "trainer-3", blurb: "考核機制、出題系統與後台管理一體的訓練平台。",
+    desc: '設計教育訓練機器人平台，具備 <span class="hl">完整的考核機制、出題系統</span> 與 <span class="hl">後台管理功能</span>。管理者可直接於後台對話窗匯入資料，由 AI 協助修訂並更新至知識庫。目前此平台亦作為 <span class="hl">業務人員指定考核平台</span>。',
+    shots: ["trainer-1", "trainer-2", "trainer-3"] },
+  { slug: "news-intel", n: "四", title: "新聞與競品快訊蒐集", img: "intel-1", blurb: "AI 排程蒐集競品動態，一鍵複製至群組。",
+    desc: '建立 <span class="hl">AI 排程</span> 尋找競品快訊，並加入 <span class="hl">公司部門資料</span> 和 <span class="hl">公司的營運方向</span>，讓 AI 生成參考建議。每日只需點開網站就能一鍵複製至群組。',
+    shots: ["intel-1", "intel-2"] },
+  { slug: "watermark", n: "五", title: "圖片浮水印編輯器", img: "watermark-1", blurb: "一鍵生成品牌浮水印照片，提升製圖效率。",
+    desc: '一鍵生成具品牌浮水印的照片，<span class="hl">大幅增加製圖效率</span>。',
+    shots: ["watermark-1", "watermark-2"] },
+  { slug: "proofreading", n: "六", title: "官網校稿平台", img: "proof-1", blurb: "文案審核流程平台化，減少 70% 來回溝通。",
+    desc: '將分散於 LINE 群組的文案審核流程整合至平台，<span class="hl">審核進度透明可追蹤</span>，行動版介面友善，方便主管查看，<span class="hl">減少至少 70% 來回溝通時間</span>。',
+    shots: ["proof-1"] },
+  { slug: "old-site", n: "七", title: "舊官網頁面更新", img: "oldsite-1", blurb: "AI 複製官網風格撰寫 HTML，縮短上架時間。",
+    desc: '運用 AI <span class="hl">複製原官網設計風格並撰寫 HTML</span>，資通部門僅需簡單語法轉換即可上架，大幅縮短更新所需時間與人力。',
+    shots: ["oldsite-1"] },
+  { slug: "dm-editor", n: "八", title: "文宣編輯器", img: "dm-1", blurb: "業務自行生成客製化文宣，降低設計門檻。",
+    desc: '運用 AI 開發文宣編輯器並部署至 GitHub，業務人員僅需幾個步驟即可 <span class="hl">自行生成客製化文宣</span>，有效降低設計門檻與製作成本。',
+    shots: ["dm-1"] },
+  { slug: "product-video", n: "九", title: "產品短片製作", img: "video-1", blurb: "市場分析到影片生成的 AI 全流程。",
+    desc: '完整執行 <span class="hl">市場分析、腳本生成、圖片生成到影片生成</span> 的全流程，運用 AI 工具產出產品社群短影片，協助品牌內容於社群平台擴散。',
+    shots: ["video-1", "video-2"] },
+  { slug: "dpp", n: "十", title: "DPP 產品數位護照", img: "dpp-3", blurb: "建立適合前端串接的產品資料庫，揭露永續資訊。",
+    desc: '運用 AI 依照欄位需求整理各項產品資料，建立 <span class="hl">適合前端串接</span> 與 <span class="hl">資料填寫</span> 的產品資料庫。透過完整揭露產品成分、認證與相關資訊，<span class="hl">提升永續資訊透明度</span>，同時符合歐洲市場對產品資訊揭露的要求。',
+    shots: ["dpp-1", "dpp-2", "dpp-3"] },
 ];
+const workHref = (w) => `ai-${w.slug}.html`;
+
+const miniCard = (w) => `    <a class="mini-card" href="${workHref(w)}">
+      <img src="assets/pages/oright/${w.img}.jpg" alt="" loading="lazy">
+      <div class="mini-body">
+        <h4><span class="mini-n">${w.n}</span>${w.title}</h4>
+        <p>${w.blurb}</p>
+      </div>
+    </a>`;
 
 const techBody = `
 ${indexHero({
@@ -334,15 +366,7 @@ ${indexHero({
 
 <section class="portfolio" id="portfolio">
   <div class="mini-grid">
-${ORIGHT_WORKS.map(
-  (w) => `    <a class="mini-card" href="oright.html#${w.id}">
-      <img src="assets/pages/oright/${w.img}.jpg" alt="" loading="lazy">
-      <div class="mini-body">
-        <h4>${w.title}</h4>
-        <p>${w.blurb}</p>
-      </div>
-    </a>`
-).join("\n")}
+${ORIGHT_WORKS.map(miniCard).join("\n")}
   </div>
 </section>`;
 
@@ -422,15 +446,33 @@ const secHead = (title, en) => `<div class="sec-head"><h2>${title}</h2>${en ? `<
 
 const RES = { width: 570, minHeight: 240, maxHeight: 360 };
 
-const work = ({ id, n, title, desc, checks, shots, layout = "" }) => `
-  <article class="work ${layout}" id="${id}">
-    <div class="work-text">
-      <h3><span class="work-n">${n}</span>${title}</h3>
-      <p>${desc}</p>
-      ${checks ? check(checks) : ""}
-    </div>
-    <div class="shots">${shots}</div>
-  </article>`;
+// 單一作品頁：重點（一句話）→ 說明與功能 → 截圖 → 上一個／下一個
+const workBody = (w, i) => {
+  const pager = (x, dir) =>
+    x
+      ? `<a class="pager-${dir}" href="${workHref(x)}"><span class="eyebrow">${dir === "prev" ? "← PREV" : "NEXT →"}</span><b><span class="mini-n">${x.n}</span>${x.title}</b></a>`
+      : `<span class="pager-${dir} is-empty"></span>`;
+  return `
+<section class="index-hero work-hero">
+  <nav class="crumbs eyebrow" aria-label="breadcrumb"><a href="tech.html">資訊作品</a><i></i><a href="oright.html">歐萊德 AI 實習成果</a></nav>
+  <h1><span class="work-n">${w.n}</span>${w.title}</h1>
+  <p class="lead">${w.blurb}</p>
+</section>
+
+<main class="work-body">
+  <div class="work-text">
+    <p>${w.desc}</p>
+    ${w.checks ? check(w.checks) : ""}
+  </div>
+  <div class="shots">${gallery(w.shots, { minHeight: 280, maxHeight: 480 })}</div>
+</main>
+
+<nav class="work-pager" aria-label="作品切換">
+  ${pager(ORIGHT_WORKS[i - 1], "prev")}
+  ${pager(ORIGHT_WORKS[i + 1], "next")}
+</nav>
+<nav class="back-nav"><a href="tech.html">← 回資訊作品總頁</a></nav>`;
+};
 
 const orightBody = `
 <section class="pbanner" aria-label="歐萊德 AI 實習成果">
@@ -483,58 +525,9 @@ const orightBody = `
   </div>
 
   ${secHead("AI 應用實作", "AI PROJECTS")}
-${work({
-  id: "w1", n: "一", title: "LINE OA 客服機器人",
-  desc: '規劃並製作 LINE AI 客服，使用 <span class="hl">RAG 檢索技術</span> 從知識庫取用資料並回覆給客戶，真人客服即使下班也能以 AI 進行回覆。',
-  checks: ["圖片、語音辨識", "多語言回覆", "提問建議、回覆品質", "批量訊息接收"],
-  shots: gallery(["line-1","line-3","line-4","line-6","line-2","line-5"]),
-})}
-${work({
-  id: "w2", n: "二", title: "社群小編 AI Agent",
-  desc: '整合 AI Agent、LINE 與 Meta System User Token，讓代理人自動讀取 <span class="hl">貼文成效</span> 與 <span class="hl">廣告花費</span>，並依據數據 <span class="hl">快速生成合適的社群內容</span>。',
-  checks: ["貼文推薦", "貼文成效檢視", "廣告成效檢視"],
-  shots: gallery(["social-1","social-2","social-3","social-4"]),
-})}
-${work({
-  id: "w3", n: "三", title: "考核 × 教育訓練機器人",
-  desc: '設計教育訓練機器人平台，具備 <span class="hl">完整的考核機制、出題系統</span> 與 <span class="hl">後台管理功能</span>。管理者可直接於後台對話窗匯入資料，由 AI 協助修訂並更新至知識庫。目前此平台亦作為 <span class="hl">業務人員指定考核平台</span>。',
-  shots: gallery(["trainer-1","trainer-2","trainer-3"]),
-})}
-${work({
-  id: "w4", n: "四", title: "新聞與競品快訊蒐集",
-  desc: '建立 <span class="hl">AI 排程</span> 尋找競品快訊，並加入 <span class="hl">公司部門資料</span> 和 <span class="hl">公司的營運方向</span>，讓 AI 生成參考建議。每日只需點開網站就能一鍵複製至群組。',
-  shots: gallery(["intel-1","intel-2"]),
-})}
-${work({
-  id: "w5", n: "五", title: "圖片浮水印編輯器",
-  desc: '一鍵生成具品牌浮水印的照片，<span class="hl">大幅增加製圖效率</span>。',
-  shots: gallery(["watermark-1","watermark-2"]),
-})}
-${work({
-  id: "w6", n: "六", title: "官網校稿平台",
-  desc: '將分散於 LINE 群組的文案審核流程整合至平台，<span class="hl">審核進度透明可追蹤</span>，行動版介面友善，方便主管查看，<span class="hl">減少至少 70% 來回溝通時間</span>。',
-  shots: gallery(["proof-1"]),
-})}
-${work({
-  id: "w7", n: "七", title: "舊官網頁面更新",
-  desc: '運用 AI <span class="hl">複製原官網設計風格並撰寫 HTML</span>，資通部門僅需簡單語法轉換即可上架，大幅縮短更新所需時間與人力。',
-  shots: gallery(["oldsite-1"]),
-})}
-${work({
-  id: "w8", n: "八", title: "文宣編輯器",
-  desc: '運用 AI 開發文宣編輯器並部署至 GitHub，業務人員僅需幾個步驟即可 <span class="hl">自行生成客製化文宣</span>，有效降低設計門檻與製作成本。',
-  shots: gallery(["dm-1"]),
-})}
-${work({
-  id: "w9", n: "九", title: "產品短片製作",
-  desc: '完整執行 <span class="hl">市場分析、腳本生成、圖片生成到影片生成</span> 的全流程，運用 AI 工具產出產品社群短影片，協助品牌內容於社群平台擴散。',
-  shots: gallery(["video-1","video-2"]),
-})}
-${work({
-  id: "w10", n: "十", title: "DPP 產品數位護照",
-  desc: '運用 AI 依照欄位需求整理各項產品資料，建立 <span class="hl">適合前端串接</span> 與 <span class="hl">資料填寫</span> 的產品資料庫。透過完整揭露產品成分、認證與相關資訊，<span class="hl">提升永續資訊透明度</span>，同時符合歐洲市場對產品資訊揭露的要求。',
-  shots: gallery(["dpp-1","dpp-2","dpp-3"]),
-})}
+  <div class="mini-grid">
+${ORIGHT_WORKS.map(miniCard).join("\n")}
+  </div>
 
   ${secHead("實習心得", "REFLECTION")}
   <div class="reflect">
@@ -668,6 +661,9 @@ const out = (name, html) => {
 out("index.html", shell({ title: "IT's LOFY DESIGN — 吳品潔作品集", body: homeBody, active: "about" }));
 out("design.html", shell({ title: "設計作品 — IT's LOFY DESIGN", body: designBody, active: "design" }));
 out("tech.html", shell({ title: "資訊作品 — IT's LOFY DESIGN", body: techBody, active: "tech" }));
+ORIGHT_WORKS.forEach((w, i) =>
+  out(workHref(w), shell({ title: `${w.title} — IT's LOFY DESIGN`, body: workBody(w, i), active: "tech", description: w.blurb }))
+);
 out("oright.html", shell({ title: "歐萊德 AI 實習成果 — IT's LOFY DESIGN", body: orightBody + '\n<nav class="back-nav"><a href="tech.html">← 回資訊作品總頁</a></nav>', active: "tech" }));
 for (const p of PROJECTS) {
   fs.mkdirSync(path.join(__dirname, "assets", "pages", p.slug), { recursive: true });

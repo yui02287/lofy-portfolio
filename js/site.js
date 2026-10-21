@@ -61,7 +61,7 @@
     ".behance", ".mini-grid > .mini-card",
     ".sec-head", ".info-list > div", ".result", ".work-text", ".shots .gal-row",
     ".result-imgs .gal-row", ".reflect article", ".photos-lead", ".project-body > .gallery .gal-row",
-    ".section-img", ".section-missing", ".back-nav"
+    ".section-img", ".section-missing", ".work-pager > a", ".back-nav"
   ];
   var targets = [];
   GROUPS.forEach(function (sel) {
